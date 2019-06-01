@@ -4,6 +4,10 @@ from pydub.generators import WhiteNoise
 from math import *
 from random import *
 
+AudioSegment.converter = r"C:\ffmpeg\bin\ffmpeg.exe" # Add ffmpeg.exe path 
+AudioSegment.ffmpeg = r"C:\ffmpeg\bin\ffmpeg.exe"    # Add ffmpeg.exe path
+AudioSegment.ffprobe = r"C:\ffmpeg\bin\ffprobe.exe"  # Add ffprobe.exe path
+
 def calc_pan(index):
 	return cos(radians(index))
 
@@ -11,7 +15,7 @@ def calc_pan(index):
 
 #first_song = playlist_songs.pop(0)
 interval = 0.2 * 1000 # sec
-song = AudioSegment.from_mp3('mp3/everlong.mp3')
+song = AudioSegment.from_mp3(r'mp3/everlong.mp3')
 song_inverted = song.invert_phase()
 song.overlay(song_inverted)
 
@@ -38,6 +42,6 @@ for piece in splitted_song:
 
 
 # lets save it!
-out_f = open("compiled/everlong.mp3", 'wb')
+out_f = open(r"compiled/everlong.mp3", 'wb')
 
 ambisonics_song.export(out_f, format='mp3')
